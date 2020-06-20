@@ -32,13 +32,13 @@
     <tr>
            <th><p class='text-center'>Фото</p></th> <th><p class='text-center'>Id</p></th><th><p class='text-center'>Название конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Место проведения</p></th><th><p class='text-center'>Действие</p></th>
     </tr>    
-    @foreach ($comments as $comment)    
+    @foreach ($conference_list as $list)    
     <tr></tr>
-     <td>{{ $comment->photo_link }}  </td>     
-     <td>{{ $comment->id }}  </td> 
-     <td>{{ $comment->conference_name }}  </td> 
-     <td>{{ $comment->date }}  </td> 
-     <td>{{ $comment->venue }}  </td> 
+     <td>{{ $list->photo_link }}  </td>     
+     <td>{{ $list->id }}  </td> 
+     <td>{{ $list->conference_name }}  </td> 
+     <td>{{ $list->date }}  </td> 
+     <td>{{ $list->venue }}  </td> 
 
 
      <td><button type="button" class="btn btn-success">Разрешить</button>      
