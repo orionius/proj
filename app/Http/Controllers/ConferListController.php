@@ -58,6 +58,8 @@ class ConferListController extends Controller
         $comments->save();
 
         $conference_list = ConferenceModel::where('id', $id)->get(); 
+
+
         return view('confer_edit', compact('conference_list')); 
       }
 
@@ -69,11 +71,16 @@ class ConferListController extends Controller
         if ($user->email == "admin@mail.ru")
             {
 
-            $conference_list =     ConferenceModel::all();
+            $conference_list = ConferenceModel::all();
             $comments =            CommentModel::all();
 
-            return view('admin', [сompact('conference_list'),compact('comments')]);
+         /*   var_dump($conference_list); */
+
+          return view('admin', compact('comments','conference_list')); 
             }
+
+
+
         }
 
 }

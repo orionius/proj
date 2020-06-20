@@ -10,7 +10,7 @@
         
         @foreach ($comments as $comment)    
     
-      {{ $list->date }}  
+      {{ $comment->date }}  
         @endforeach 
 
 
@@ -21,8 +21,7 @@
     @foreach ($conference_list as $list)    
 
   {{ $list->date }}  
-    @endforeach 
 
-
+  @endforeach 
 </body>
 
