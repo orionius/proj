@@ -27,10 +27,7 @@ class ConferListController extends Controller
         $conference_list = ConferenceModel::all();
         return view('confer_list', compact('conference_list')); 
       }
-      
-
-
-      public function confer_submit (request $req)
+          public function confer_submit (request $req)
       {
             $id=             $req->input('id');        
             $edit=           $req->input('edit');
@@ -54,22 +51,21 @@ class ConferListController extends Controller
         $email=          $req->input('email');  
         $comment=        $req->input('comment');  
 
-
-
-$comments  = new CommentModel ;
-$comments->name = $name;
-$comments->email = $email;
-$comments->comment = $comment;
-
-
-$comments->save();
-
-
+        $comments  = new CommentModel ;
+        $comments->name = $name;
+        $comments->email = $email;
+        $comments->comment = $comment;
+        $comments->save();
 
         $conference_list = ConferenceModel::where('id', $id)->get(); 
         return view('confer_edit', compact('conference_list')); 
       }
 
-
+      public function confer_admin ()
+      {
+          $conference_list =    ConferenceModel::all();
+          $Comment =       CommentModel::all();
+          return view('confer_list', [сompact('conference_list'),compact('Comment')]);
+        }
 
 }

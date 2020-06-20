@@ -38,6 +38,7 @@ return view('home');
  Route::get('/confer_list', 'ConferListController@confer_list')->name('confer_list');
  Route::post('/confer_edit', 'ConferListController@confer_submit')->name('confer_submit');
  Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
+ Route::post('/confer_edit/admin', 'ConferListController@confer_admin')->name('confer_admin');
 
 
 
