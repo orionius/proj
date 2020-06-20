@@ -34,8 +34,20 @@
     </tr>    
     @foreach ($conference_list as $list)    
     <tr></tr>
-     <td>{{ $list->photo_link }}  </td>     
+    <td>
+    <p > <img class="img-top" src="{{URL::asset('img')}}/{{ $list->photo_link }}" alt="Card" > </p>
+    </td>
+   
      <td>{{ $list->id }}  </td> 
+
+     <td>
+        <div class="form-group">
+
+            <input type="text" class="form-control" id="conference_name"  placeholder="{{ $list->conference_name }} ">
+          </div>
+     </td>
+
+
      <td>{{ $list->conference_name }}  </td> 
      <td>{{ $list->date }}  </td> 
      <td>{{ $list->venue }}  </td> 
