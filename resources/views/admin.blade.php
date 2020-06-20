@@ -94,12 +94,18 @@ td
                         <div class="row">
                           <div class="col-sm">
 
-                            <form>
+
+
+
+
+
+                          <form method="post" action="{{route('admin_download')}}" enctype="multipart/form-data">
+                            {{ csrf_field() }} 
                                 <div class="form-group">
                                   <label for="exampleFormControlFile1">Загрузка картинки</label>
-                                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                  <input type="file" name = "image" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
-                            </form>
+
 
 
                             <input class="form-control form-control-lg" type="text" placeholder="Тема конференции">
@@ -107,7 +113,10 @@ td
                             <input class="form-control" type="date" placeholder="Дата проведения">
                             <br>
                             <input class="form-control form-control-sm" type="text" placeholder="Место проведения">
-                           
+                            <br>
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+
+                            </form>
 
                           </div>
                         </div>
@@ -121,8 +130,10 @@ td
     </div>
 </div>
 
-
-
+<br>
+<br>
+<br>
+@include('layouts.footer')
 
 </body>
 

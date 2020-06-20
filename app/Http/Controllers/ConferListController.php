@@ -73,16 +73,18 @@ class ConferListController extends Controller
 
             $conference_list = ConferenceModel::all();
             $comments =            CommentModel::all();
-
-         /*   var_dump($conference_list); */
-    
-          return view('admin', compact('comments','conference_list')); 
-
-
+        /*   var_dump($conference_list); */
+           return view('admin', compact('comments','conference_list')); 
             }
-
-
-
         }
+
+
+        public function admin_download (Request $request){
+        
+            $patch = $request->file('image')->store('uploads','public') ;
+             $conference_list = ConferenceModel::all();
+             $comments =            CommentModel::all();
+            return view('admin', compact('comments','conference_list')); 
+           }
 
 }

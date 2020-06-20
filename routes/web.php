@@ -29,6 +29,15 @@ Route::get('/', function () {
  Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
  Route::get('/admin', 'ConferListController@confer_admin')->name('confer_admin');
 
+ Route::post('/admin', 'ConferListController@admin_download')->name('admin_download');
+
+
+
+
+
+
+
+
 
 
  Route::get('/add', function () {
