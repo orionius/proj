@@ -35,7 +35,7 @@
     @foreach ($conference_list as $list)    
     <tr></tr>
     <td>
-    <p > <img class="img-top" src="{{URL::asset('img')}}/{{ $list->photo_link }}" alt="Card" > </p>
+    <p > <img width = 100px height=100px class="img-top" src="{{URL::asset('img')}}/{{ $list->photo_link }}" alt="Card" > </p>
     </td>
    
      <td>{{ $list->id }}  </td> 
@@ -48,7 +48,7 @@
      </td>
 
 
-     <td>{{ $list->conference_name }}  </td> 
+ 
      <td>{{ $list->date }}  </td> 
      <td>{{ $list->venue }}  </td> 
 
