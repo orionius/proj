@@ -54,7 +54,7 @@ class ConferListController extends Controller
         $email=          $req->input('email');  
         $comment=        $req->input('comment');  
 
-echo $comment ;
+
 
 $comments  = new CommentModel ;
 $comments->name = $name;
