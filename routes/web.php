@@ -1,0 +1,55 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\ConferenceModel;
+use App\CommentModel;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/admin', function () {
+$user = auth()->user();
+
+ 
+
+if ($user->email == "admin@mail.ru")
+{
+
+    return view('admin');   
+}
+
+return view('home');
+
+});
+
+ Route::get('/confer_list', 'ConferListController@confer_list')->name('confer_list');
+ Route::post('/confer_edit', 'ConferListController@confer_submit')->name('confer_submit');
+ Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
+
+
+
+ Route::get('/add', function () {
+    $ConferenceModel  = new ConferenceModel ;
+    $ConferenceModel->photo_link = 'cnfer1.jpg';
+    $ConferenceModel->save();
+    return view('home');
+    });
+ 
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
