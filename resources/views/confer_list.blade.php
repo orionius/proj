@@ -67,7 +67,7 @@ body {
 </div>
 
 <div> 
-<div class="index_cat_link"><p >Конференция состоится  {{ $list->date }} </p> 
+<div class="index_cat_link"><p >Конференция состоится  {{ $list->dates->format('d.m.Y')  }} </p> 
 
 <p> Место проведения </p>,                                  
 <p class="ross_p">

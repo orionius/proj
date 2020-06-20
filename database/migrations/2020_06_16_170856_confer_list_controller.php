@@ -16,7 +16,7 @@ class ConferListController extends Migration
         Schema::create('conference_list', function (Blueprint $table) {
             $table->increments('id');
             $table->string('conference_name')->nullable();
-            $table->date('date')->nullable();
+            $table->date('dates')->nullable();
             $table->string('venue')->nullable();
             $table->text('photo_link')->nullable();
             $table->timestamps();

@@ -1,8 +1,20 @@
 @include('layouts.header')
 @include('layouts.app')
 
+<style>
+td
+{
+
+    align:center;
+
+}
+
+</style>
+
 <body>
    
+ 
+
 
     <table width="100%" border="1" cellpadding="4" cellspacing="0">
     <tr>
@@ -12,8 +24,9 @@
         
         @foreach ($comments as $comment)    
     <tr></tr>
+
      <td>{{ $comment->id }}  </td> 
-     <td>{{ $comment->date }}  </td> 
+     <td>{{ $comment->created_at->format('d.m.Y') }}  </td> 
      <td>{{ $comment->name }}  </td> 
      <td>{{ $comment->email }}  </td> 
      <td>{{ $comment->comment }}  </td> 
@@ -34,17 +47,14 @@
     </tr>    
     @foreach ($conference_list as $list)    
     <tr></tr>
-    <td>
-    <p > <img width = 100px height=100px class="img-top" src="{{URL::asset('img')}}/{{ $list->photo_link }}" alt="Card" > </p>
+    <td width=100px >
+    <p > {{ $list->photo_link }} </p>
     </td>
    
      <td>{{ $list->id }}  </td> 
 
-     <td>
-        <div class="form-group">
+     <td> {{ $list->conference_name }} 
 
-            <input type="text" class="form-control" id="conference_name"  placeholder="{{ $list->conference_name }} ">
-          </div>
      </td>
 
 
@@ -58,5 +68,61 @@
     </tr>
         @endforeach 
 </table>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+
+
+
+                <div class="card-header">Добавить новую конференцию</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm">
+
+                            <form>
+                                <div class="form-group">
+                                  <label for="exampleFormControlFile1">Загрузка картинки</label>
+                                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                            </form>
+
+
+                            <input class="form-control form-control-lg" type="text" placeholder="Тема конференции">
+                            <br>
+                            <input class="form-control" type="date" placeholder="Дата проведения">
+                            <br>
+                            <input class="form-control form-control-sm" type="text" placeholder="Место проведения">
+                           
+
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </body>
 

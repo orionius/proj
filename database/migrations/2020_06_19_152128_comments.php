@@ -16,7 +16,6 @@ class Comments extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->    nullable();
-            $table->date('date')->      nullable();
             $table->string('email')->   nullable();
             $table->text('comment')->   nullable();
             $table->boolean('allowed')->default(0);

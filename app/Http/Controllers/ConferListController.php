@@ -75,8 +75,10 @@ class ConferListController extends Controller
             $comments =            CommentModel::all();
 
          /*   var_dump($conference_list); */
-
+    
           return view('admin', compact('comments','conference_list')); 
+
+
             }
 
 
