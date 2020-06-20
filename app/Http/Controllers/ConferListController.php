@@ -63,9 +63,17 @@ class ConferListController extends Controller
 
       public function confer_admin ()
       {
-          $conference_list =    ConferenceModel::all();
-          $Comment =       CommentModel::all();
-          return view('confer_list', [сompact('conference_list'),compact('Comment')]);
+
+   
+        $user = auth()->user();
+        if ($user->email == "admin@mail.ru")
+            {
+
+            $conference_list =     ConferenceModel::all();
+            $comments =            CommentModel::all();
+
+            return view('admin', [сompact('conference_list'),compact('comments')]);
+            }
         }
 
 }

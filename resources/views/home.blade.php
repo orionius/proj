@@ -35,7 +35,7 @@
                           <div class="col-sm">
                             <a href="{{ url('/add') }}" class="btn btn-dark">Создать</a></div>
                           <div class="col-sm">
-                            <a href="{{ url('/admin') }}" class="btn btn-dark">Админка</a>
+                            <a href="{{ route('confer_admin') }}" class="btn btn-dark">Админка</a>
                           </div>
                         </div>
                       </div>
