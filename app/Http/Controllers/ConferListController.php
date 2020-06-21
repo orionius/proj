@@ -54,23 +54,23 @@ class ConferListController extends Controller
     public function confer_edit ()
     {
         $conference_list = ConferenceModel::all();
-        return view('confer_list', compact('conference_list')); 
+        $comments =            CommentModel::all();
+        return view('confer_list',compact('conference_list','comments')); 
       }
+
+
           public function confer_submit (request $req)
       {
             $id=             $req->input('id');        
             $edit=           $req->input('edit');
             $del=            $req->input('del');
       
-        if ($del == 2 )
-        {
-            ConferenceModel::destroy([$id]);
-            $conference_list = ConferenceModel::all();
-            return view('confer_list', compact('conference_list')); 
-         }
+
         if ($edit == 5 )
            $conference_list = ConferenceModel::where('id', $id)->get(); 
-           return view('confer_edit', compact('conference_list')); 
+           $comments =            CommentModel::all();
+           $comments =            CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get(); 
+           return view('confer_edit', compact('conference_list','comments')); 
         }
 
     public function coment_submit (request $req)
@@ -78,13 +78,15 @@ class ConferListController extends Controller
         $id=             $req->input('id');  
 
         $comments  = new CommentModel ;
+        $comments->id_confer =  $req->input('id');          
         $comments->name =       $req->input('name');  
         $comments->email =      $req->input('email');  
         $comments->comment =    $req->input('comment');  
         $comments->save();
 
         $conference_list = ConferenceModel::where('id', $id)->get(); 
-        return view('confer_edit', compact('conference_list')); 
+        $comments =            CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get(); 
+        return view('confer_edit', compact('conference_list','comments')); 
       }
 
       public function confer_admin ()

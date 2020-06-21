@@ -46,7 +46,7 @@ width:50%; height: 50% ;    display: block;
 
 
 <div class="layer1 ">
-    <p > <img class="img-top" src="{{URL::asset('img')}}/{{ $list->photo_link }}" alt="Card" > </p>
+    <p > <img class="img-top" src="{{URL::asset('storage')}}/{{ $list->photo_link }}" alt="Card" > </p>
 </div>
 
 
@@ -66,6 +66,46 @@ width:50%; height: 50% ;    display: block;
 
 <hr>
 
+
+
+      @foreach ($comments as $comment)    
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+  
+    </div>
+    <div class="col-md-auto">
+      <table style=   cellpadding="4"  >
+          <td style= "align:left;" width = 300>  {{ $comment->name }}    </td>      
+          <td style= "align:left;" width = 500>  {{ $comment->comment }}       </td>
+      </table>
+    </div>
+    <div class="col col-lg-2">
+
+    </div>
+  </div>
+
+</div>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@endforeach 
+
+
+<hr>
 <div class="container">
     <div class="row">
       <div class="col">

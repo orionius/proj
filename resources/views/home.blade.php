@@ -33,8 +33,8 @@
                           <div class="col-sm">
                             <a href="{{ url('/confer_list') }}" class="btn btn-dark">Список</a></div>
                           <div class="col-sm">
-                            <a href="{{ url('/add') }}" class="btn btn-dark">Создать</a></div>
-                          <div class="col-sm">
+                    {{--       <a href="{{ url('/add') }}" class="btn btn-dark">Создать</a></div>
+                     --}}     <div class="col-sm">
                             <a href="{{ route('confer_admin') }}" class="btn btn-dark">Админка</a>
                           </div>
                         </div>

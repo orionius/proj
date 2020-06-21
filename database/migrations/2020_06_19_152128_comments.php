@@ -19,6 +19,8 @@ class Comments extends Migration
             $table->string('email')->   nullable();
             $table->text('comment')->   nullable();
             $table->boolean('allowed')->default(0);
+            $table->integer('id_confer')->default(0);
+
             $table->timestamps();
         });
     }

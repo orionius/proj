@@ -63,7 +63,7 @@ body {
 
         
 <div class="layer1">
-    <p style=" width:200px; height: 100px"> <img class="card-img-top" src="{{URL::asset('storage')}}/{{ $list->photo_link }}" alt="Card" > </p>
+    <p style=" width:100px; height: 100px"> <img class="card-img-top" src="{{URL::asset('storage')}}/{{ $list->photo_link }}" alt="Card" > </p>
 </div>
 
 <div> 

@@ -23,9 +23,9 @@ body
  
 
 
-    <table width="100%" border="1" cellpadding="4" cellspacing="0">
+    <table width="100%" border="1" cellspacing="0">
     <tr>
-            <th><p class='text-center'>Id</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Имя</p></th><th><p class='text-center'>email</p></th><th><p class='text-center'>Комментарий</p></th><th><p class='text-center'>Действие</p></th>
+            <th><p class='text-center'>№ конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Имя</p></th><th><p class='text-center'>email</p></th><th><p class='text-center'>Комментарий</p></th><th><p class='text-center'>Действие</p></th>
     </tr>
 
         
@@ -35,7 +35,9 @@ body
     <tr style = "background-color : Aquamarine">
 
 @endif
-     <td>{{ $comment->id }}  </td> 
+
+     <td class='text-center'>{{ $comment->id_confer }}  </td> 
+     
      <td>{{ Date::parse($comment->created_at)->format('j F Y г.') }} </td> 
      
      <td>{{ $comment->name }}  </td> 
@@ -65,12 +67,12 @@ body
 
     <table width="100%" border="1" cellpadding="4" cellspacing="0">
     <tr>
-           <th><p class='text-center'>Id</p></th> <th><p class='text-center'>Ссылка на фото</p></th><th><p class='text-center'>Название конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Место проведения</p></th><th><p class='text-center'>Действие</p></th>
+           <th><p class='text-center'>№</p></th> <th><p class='text-center'>Ссылка на фото</p></th><th><p class='text-center'>Название конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Место проведения</p></th><th><p class='text-center'>Действие</p></th>
     </tr>    
     @foreach ($conference_list as $list)    
     <tr></tr>
     <td width=100px >
-    <p > {{ $list->id }} </p>
+    <p class='text-center'> {{ $list->id }} </p>
     </td>
    
      <td>{{ $list->photo_link }}  </td> 
