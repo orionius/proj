@@ -8,9 +8,35 @@ use App\ConferenceModel;
 use App\CommentModel;
 
 
+
+
 class ConferListController extends Controller
 {
      
+
+
+    public function confer_admin ()
+    {
+
+ 
+      $user = auth()->user();
+      if ($user->email == "admin@mail.ru")
+          {
+
+      /*   var_dump($conference_list); */
+      $conference_list =     ConferenceModel::all();
+      $comments =            CommentModel::all();
+
+     return view('admin', compact('comments','conference_list')); 
+          }
+      }
+
+
+
+
+
+
+
     public function confer_list ()
     {
      $conference_list = ConferenceModel::all();
@@ -21,7 +47,9 @@ class ConferListController extends Controller
 
     public function admin_commentdelallow (request $req )
     {
-
+        $request->validate([
+            'id' => 'required',
+        ]);
 
         $id=      $req->input('id');  
 
@@ -75,6 +103,17 @@ class ConferListController extends Controller
 
     public function coment_submit (request $req)
     {
+
+        $request->validate([
+            'id' =>  'required|numeric|max:10',
+            'name' => 'required',
+            'email' => 'required',
+            'comment' => 'required',
+
+
+        ]);
+
+
         $id=             $req->input('id');  
 
         $comments  = new CommentModel ;
@@ -89,26 +128,23 @@ class ConferListController extends Controller
         return view('confer_edit', compact('conference_list','comments')); 
       }
 
-      public function confer_admin ()
-      {
 
-   
-        $user = auth()->user();
-        if ($user->email == "admin@mail.ru")
-            {
-
-        /*   var_dump($conference_list); */
-        $conference_list =     ConferenceModel::all();
-        $comments =            CommentModel::all();
-
-       return view('admin', compact('comments','conference_list')); 
-            }
-        }
 
 
         public function admin_download (Request $request){
 
+        $validate=    $request->validate([
+                'image' => 'image | required',
+                'topic_name'=>'required',
+                'start_date'=>'required',
+                'location'=>'required',
+            ]);
+
+
+
+
             $photo_link = $request->file('image')->store('uploads','public') ;
+
 
             $Conference  = new ConferenceModel ;
             $Conference->photo_link =               $photo_link ;          
@@ -121,8 +157,9 @@ class ConferListController extends Controller
 
              $conference_list =     ConferenceModel::all();
              $comments =            CommentModel::all();
-             flash('Файл добавлен.Введите остальные данные')->success();
+flash('Данные успешно добавлены')->error();  
             return view('admin', compact('comments','conference_list')); 
+     
            }
 
         public function admin_commentsubmit  (Request $request){

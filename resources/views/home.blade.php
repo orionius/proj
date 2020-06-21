@@ -4,6 +4,18 @@
 @include('layouts.app')
 @include('layouts.styles')
 
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <body>
     
 
@@ -31,7 +43,7 @@
                     <div class="container">
                         <div class="row">
                           <div class="col-sm">
-                            <a href="{{ url('/confer_list') }}" class="btn btn-dark">Список</a></div>
+                            <a href="{{ url('/confer_list') }}" class="btn btn-dark">Список конференций</a></div>
                           <div class="col-sm">
                     {{--       <a href="{{ url('/add') }}" class="btn btn-dark">Создать</a></div>
                      --}}     <div class="col-sm">

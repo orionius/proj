@@ -2,6 +2,16 @@
 @include('layouts.app')
 
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap');
 

@@ -1,6 +1,22 @@
 @include('layouts.header')
 @include('layouts.app')
 
+
+<h1>Create Post</h1>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<!-- Create Post Form -->
+
+
 <style>
 
 
@@ -133,7 +149,7 @@ body
                                   <label for="exampleFormControlFile1">Загрузка картинки</label>
                                   <input type="file" name = "image" class="form-control-file" id="exampleFormControlFile1" >
 <br>
-
+@include('flash::message')
                             </div>
                             <input id ="1" class="form-control form-control-lg" name = "topic_name"  type="text"  placeholder="Тема конференции">
                             <br>
