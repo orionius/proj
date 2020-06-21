@@ -50,7 +50,7 @@
 
 @endif
 
-@include('layouts.footer')
-@include('layouts.scripts')
+
 
 </body>
+@include('layouts.footer')

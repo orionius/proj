@@ -2,12 +2,19 @@
 @include('layouts.app')
 
 <style>
-td
+
+
+body
 {
 
-    align:center;
+    background:  url('{{URL::asset('img')}}/wall2.jpg')  no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 
 }
+
 
 </style>
 
@@ -63,9 +70,14 @@ td
      <td>{{ $list->venue }}  </td> 
 
 
-     <td><button type="button" class="btn btn-success">Разрешить</button>      
-     <button type="button" class="btn btn-danger">Удалить</button> </td>      
-    </tr>
+    <form method="post" action="{{route('admin_delconfer')}}" enctype="multipart/form-data">
+        {{ csrf_field() }} 
+        <input type="hidden" name="id"          value="{{ $list->id }}">    
+    <td class='text-center'>  <button type="submit" class="btn btn-danger"  >Удалить</button> </td>      
+    </form>    
+
+
+</tr>
         @endforeach 
 </table>
 
@@ -94,25 +106,21 @@ td
                         <div class="row">
                           <div class="col-sm">
 
-
-
-
-
+                <div style = "border='1'">    
 
                           <form method="post" action="{{route('admin_download')}}" enctype="multipart/form-data">
                             {{ csrf_field() }} 
                                 <div class="form-group">
                                   <label for="exampleFormControlFile1">Загрузка картинки</label>
-                                  <input type="file" name = "image" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
+                                  <input type="file" name = "image" class="form-control-file" id="exampleFormControlFile1" >
+<br>
 
-
-
-                            <input class="form-control form-control-lg" type="text" placeholder="Тема конференции">
+                            </div>
+                            <input id ="1" class="form-control form-control-lg" name = "topic_name"  type="text"  placeholder="Тема конференции">
                             <br>
-                            <input class="form-control" type="date" placeholder="Дата проведения">
+                            <input id ="2" class="form-control" name = "start_date" type="date" placeholder="Дата проведения">
                             <br>
-                            <input class="form-control form-control-sm" type="text" placeholder="Место проведения">
+                            <input id ="3" class="form-control form-control-sm" name ="location" type="text" placeholder="Место проведения">
                             <br>
                             <button type="submit" class="btn btn-primary">Отправить</button>
 
@@ -133,7 +141,8 @@ td
 <br>
 <br>
 <br>
-@include('layouts.footer')
+
 
 </body>
 
+@include('layouts.footer')

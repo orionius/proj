@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 
 
+
  Route::get('/confer_list', 'ConferListController@confer_list')->name('confer_list');
  Route::post('/confer_edit', 'ConferListController@confer_submit')->name('confer_submit');
  Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
@@ -33,19 +34,13 @@ Route::get('/', function () {
 
 
 
+ Route::post('/admin/add', 'ConferListController@admin_addconfer')->name('admin_addconfer');
+
+
+ Route::post('/admin/add', 'ConferListController@admin_delconfer')->name('admin_delconfer');
 
 
 
-
-
-
-
- Route::get('/add', function () {
-    $ConferenceModel  = new ConferenceModel ;
-    $ConferenceModel->photo_link = 'cnfer1.jpg';
-    $ConferenceModel->save();
-    return view('home');
-    });
  
 
 Auth::routes();

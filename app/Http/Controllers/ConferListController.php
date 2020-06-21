@@ -7,19 +7,25 @@ use Illuminate\Support\Facades\DB;
 use App\ConferenceModel;
 use App\CommentModel;
 
+
 class ConferListController extends Controller
 {
-    
+     
     public function confer_list ()
     {
-        $conference_list = ConferenceModel::all();
+     $conference_list = ConferenceModel::all();
         return view('confer_list', compact('conference_list')); 
       }
 
       
-    public function confer_delete ()
+    public function admin_delconfer (request $req )
     {
-        ConferenceModel::destroy(1);
+        $id=             $req->input('id');  
+        ConferenceModel::destroy( $id);
+
+        $conference_list =     ConferenceModel::all();
+        $comments =            CommentModel::all();
+       return view('admin', compact('comments','conference_list'));         
       }
 
     public function confer_edit ()
@@ -47,19 +53,14 @@ class ConferListController extends Controller
     public function coment_submit (request $req)
     {
         $id=             $req->input('id');  
-        $name=           $req->input('name');  
-        $email=          $req->input('email');  
-        $comment=        $req->input('comment');  
 
         $comments  = new CommentModel ;
-        $comments->name = $name;
-        $comments->email = $email;
-        $comments->comment = $comment;
+        $comments->name =       $req->input('name');  
+        $comments->email =      $req->input('email');  
+        $comments->comment =    $req->input('comment');  
         $comments->save();
 
         $conference_list = ConferenceModel::where('id', $id)->get(); 
-
-
         return view('confer_edit', compact('conference_list')); 
       }
 
@@ -71,20 +72,39 @@ class ConferListController extends Controller
         if ($user->email == "admin@mail.ru")
             {
 
-            $conference_list = ConferenceModel::all();
-            $comments =            CommentModel::all();
         /*   var_dump($conference_list); */
-           return view('admin', compact('comments','conference_list')); 
+        $conference_list =     ConferenceModel::all();
+        $comments =            CommentModel::all();
+        flash('Файл добавлен.Введите остальные данные')->success();
+       return view('admin', compact('comments','conference_list')); 
             }
         }
 
 
         public function admin_download (Request $request){
-        
-            $patch = $request->file('image')->store('uploads','public') ;
-             $conference_list = ConferenceModel::all();
+
+            $photo_link = $request->file('image')->store('uploads','public') ;
+
+            $Conference  = new ConferenceModel ;
+            $Conference->photo_link =               $photo_link ;          
+            $Conference->conference_name =          $request->input('topic_name'); 
+            $Conference->dates =                    $request->input('start_date'); 
+            $Conference->venue =                    $request->input('location');
+            $Conference->save();
+
+
+
+             $conference_list =     ConferenceModel::all();
              $comments =            CommentModel::all();
+             flash('Файл добавлен.Введите остальные данные')->success();
             return view('admin', compact('comments','conference_list')); 
            }
+
+
+
+
+
+
+
 
 }
