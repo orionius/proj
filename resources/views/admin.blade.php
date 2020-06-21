@@ -33,13 +33,24 @@ body
     <tr></tr>
 
      <td>{{ $comment->id }}  </td> 
-     <td>{{ $comment->created_at->format('d.m.Y') }}  </td> 
+     <td>{{ Date::parse($comment->created_at)->format('j F Y г.') }} </td> 
+     
      <td>{{ $comment->name }}  </td> 
      <td>{{ $comment->email }}  </td> 
      <td>{{ $comment->comment }}  </td> 
-     <td><button type="button" class="btn btn-success">Разрешить</button>     
-      <button type="button" class="btn btn-danger">Удалить</button> </td>      
+     
+    <td class='text-center'>
+         <div>
+            <form method="POST" action="{{route('admin_delconfer')}}" enctype="multipart/form-data">
+                {{ csrf_field() }} 
+            <button type="submit"  name ="allow" value ="10"  class="btn btn-success">Разрешить</button>     
+            <button type="submit"  name ="del" value ="10" class="btn btn-danger">Удалить</button> 
+            </form>
+        </div>   
+    </td>
+
     </tr>
+ 
         @endforeach 
 </table>
 <br>
@@ -50,15 +61,15 @@ body
 
     <table width="100%" border="1" cellpadding="4" cellspacing="0">
     <tr>
-           <th><p class='text-center'>Фото</p></th> <th><p class='text-center'>Id</p></th><th><p class='text-center'>Название конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Место проведения</p></th><th><p class='text-center'>Действие</p></th>
+           <th><p class='text-center'>Id</p></th> <th><p class='text-center'>Ссылка на фото</p></th><th><p class='text-center'>Название конференции</p></th><th><p class='text-center'>Дата</p></th><th><p class='text-center'>Место проведения</p></th><th><p class='text-center'>Действие</p></th>
     </tr>    
     @foreach ($conference_list as $list)    
     <tr></tr>
     <td width=100px >
-    <p > {{ $list->photo_link }} </p>
+    <p > {{ $list->id }} </p>
     </td>
    
-     <td>{{ $list->id }}  </td> 
+     <td>{{ $list->photo_link }}  </td> 
 
      <td> {{ $list->conference_name }} 
 
@@ -66,7 +77,9 @@ body
 
 
  
-     <td>{{ $list->date }}  </td> 
+
+     <td>{{ Date::parse($list->dates)->format('j F Y г.') }} </td> 
+
      <td>{{ $list->venue }}  </td> 
 
 

@@ -34,8 +34,6 @@ Route::get('/', function () {
 
 
 
- Route::post('/admin/add', 'ConferListController@admin_addconfer')->name('admin_addconfer');
-
 
  Route::post('/admin/add', 'ConferListController@admin_delconfer')->name('admin_delconfer');
 

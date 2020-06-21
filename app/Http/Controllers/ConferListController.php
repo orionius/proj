@@ -75,7 +75,7 @@ class ConferListController extends Controller
         /*   var_dump($conference_list); */
         $conference_list =     ConferenceModel::all();
         $comments =            CommentModel::all();
-        flash('Файл добавлен.Введите остальные данные')->success();
+
        return view('admin', compact('comments','conference_list')); 
             }
         }
@@ -100,11 +100,9 @@ class ConferListController extends Controller
             return view('admin', compact('comments','conference_list')); 
            }
 
-
-
-
-
-
-
-
+        public function admin_commentsubmit  (Request $request){
+             $conference_list =     ConferenceModel::all();
+             $comments =            CommentModel::all();
+            return view('admin', compact('comments','conference_list')); 
+           }
 }
