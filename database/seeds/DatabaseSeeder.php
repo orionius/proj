@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         $vader = DB::table('users')->insert([
             'name'       => 'admin',
+            'role'       => '1',
             'email'      => 'admin@mail.ru',
             'password'   => Hash::make('admin'),
             'created_at' => new DateTime(),
