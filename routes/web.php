@@ -31,7 +31,7 @@ Route::get('/', function () {
  Route::get('/admin', 'ConferListController@confer_admin')->name('confer_admin');
 
  Route::post('/admin', 'ConferListController@admin_download')->name('admin_download');
-
+ Route::post('/admin/delallow', 'ConferListController@admin_commentdelallow')->name('admin_commentdelallow');
 
 
 

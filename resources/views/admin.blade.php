@@ -30,8 +30,11 @@ body
 
         
         @foreach ($comments as $comment)    
-    <tr></tr>
 
+@if( $comment->allowed  == 1) 
+    <tr style = "background-color : Aquamarine">
+
+@endif
      <td>{{ $comment->id }}  </td> 
      <td>{{ Date::parse($comment->created_at)->format('j F Y г.') }} </td> 
      
@@ -41,8 +44,9 @@ body
      
     <td class='text-center'>
          <div>
-            <form method="POST" action="{{route('admin_delconfer')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('admin_commentdelallow')}}" enctype="multipart/form-data">
                 {{ csrf_field() }} 
+                <input type="hidden" name="id"          value="{{ $comment->id }}">  
             <button type="submit"  name ="allow" value ="10"  class="btn btn-success">Разрешить</button>     
             <button type="submit"  name ="del" value ="10" class="btn btn-danger">Удалить</button> 
             </form>

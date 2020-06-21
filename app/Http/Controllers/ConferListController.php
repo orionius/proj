@@ -18,6 +18,29 @@ class ConferListController extends Controller
       }
 
       
+
+    public function admin_commentdelallow (request $req )
+    {
+
+
+        $id=      $req->input('id');  
+
+        if($req->input('allow') == 10 ){
+            $comments = CommentModel::where('id', $id)->first(); 
+            $comments->allowed =       1;  
+            $comments->save();
+
+        }
+        if($req->input('del') == 10 ){
+        CommentModel::destroy( $id);
+        }
+        
+        $conference_list =     ConferenceModel::all();
+        $comments =            CommentModel::all();
+       return view('admin', compact('comments','conference_list'));         
+      }
+
+      
     public function admin_delconfer (request $req )
     {
         $id=             $req->input('id');  
