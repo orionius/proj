@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\ConferenceModel;
 use App\CommentModel;
-
+use App\User;
 
 
 
@@ -17,11 +17,10 @@ class ConferListController extends Controller
 
     public function confer_admin ()
     {
-
- 
       $user = auth()->user();
-      if ($user->email == "admin@mail.ru")
-          {
+      $hash = User::select('password')->where('id','1')->first();
+
+if ( $user->password ==  $hash->password ) {
 
       /*   var_dump($conference_list); */
       $conference_list =     ConferenceModel::all();
