@@ -9,159 +9,148 @@ use App\CommentModel;
 use App\User;
 
 
-
 class ConferListController extends Controller
 {
-     
 
 
-    public function confer_admin ()
+    public function confer_admin()
     {
-      $user = auth()->user();
-      $hash = User::select('password')->where('id','1')->first();
+        $user = auth()->user();
+        $hash = User::select('password')->where('id', '1')->first();
 
-if ( $user->password ==  $hash->password ) {
+        if ($user->password == $hash->password) {
 
-      /*   var_dump($conference_list); */
-      $conference_list =     ConferenceModel::all();
-      $comments =            CommentModel::all();
+            /*   var_dump($conference_list); */
+            $conference_list = ConferenceModel::all();
+            $comments = CommentModel::all();
 
-     return view('admin', compact('comments','conference_list')); 
-          }
-      }
-
-
+            return view('admin', compact('comments', 'conference_list'));
+        }
+    }
 
 
-
-
-
-    public function confer_list ()
+    public function confer_list()
     {
-     $conference_list = ConferenceModel::all();
-        return view('confer_list', compact('conference_list')); 
-      }
+        $conference_list = ConferenceModel::all();
+        return view('confer_list', compact('conference_list'));
+    }
 
-      
 
-    public function admin_commentdelallow (request $req )
+    public function admin_commentdelallow(request $req)
     {
 
 
-        $id=      $req->input('id');  
+        $id = $req->input('id');
 
-        if($req->input('allow') == 10 ){
-            $comments = CommentModel::where('id', $id)->first(); 
-            $comments->allowed =       1;  
+        if ($req->input('allow') == 10) {
+            $comments = CommentModel::where('id', $id)->first();
+            $comments->allowed = 1;
             $comments->save();
 
         }
-        if($req->input('del') == 10 ){
-        CommentModel::destroy( $id);
+        if ($req->input('del') == 10) {
+            CommentModel::destroy($id);
         }
-        
-        $conference_list =     ConferenceModel::all();
-        $comments =            CommentModel::all();
-       return view('admin', compact('comments','conference_list'));         
-      }
 
-      
-    public function admin_delconfer (request $req )
+        $conference_list = ConferenceModel::all();
+        $comments = CommentModel::all();
+        return view('admin', compact('comments', 'conference_list'));
+    }
+
+
+    public function admin_delconfer(request $req)
     {
-        $id=             $req->input('id');  
-        ConferenceModel::destroy( $id);
+        $id = $req->input('id');
+        ConferenceModel::destroy($id);
 
-        $conference_list =     ConferenceModel::all();
-        $comments =            CommentModel::all();
-       return view('admin', compact('comments','conference_list'));         
-      }
+        $conference_list = ConferenceModel::all();
+        $comments = CommentModel::all();
+        return view('admin', compact('comments', 'conference_list'));
+    }
 
-    public function confer_edit ()
+    public function confer_edit()
     {
         $conference_list = ConferenceModel::all();
-        $comments =            CommentModel::all();
-        return view('confer_list',compact('conference_list','comments')); 
-      }
+        $comments = CommentModel::all();
+        return view('confer_list', compact('conference_list', 'comments'));
+    }
 
 
-          public function confer_submit (request $req)
-      {
-            $id=             $req->input('id');        
-            $edit=           $req->input('edit');
-            $del=            $req->input('del');
-      
-
-        if ($edit == 5 )
-           $conference_list = ConferenceModel::where('id', $id)->get(); 
-           $comments =            CommentModel::all();
-           $comments =            CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get(); 
-           return view('confer_edit', compact('conference_list','comments')); 
-        }
-
-    public function coment_submit (request $req)
+    public function confer_submit(request $req)
     {
-/*
-        $request->validate([
-            'id' =>  'required|numeric|max:10',
-            'name' => 'required',
-            'email' => 'required',
-            'comment' => 'required',
+        $id = $req->input('id');
+        $edit = $req->input('edit');
+        $del = $req->input('del');
 
 
-        ]);
+        if ($edit == 5)
+            $conference_list = ConferenceModel::where('id', $id)->get();
+        $comments = CommentModel::all();
+        $comments = CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get();
+        return view('confer_edit', compact('conference_list', 'comments'));
+    }
 
-*/
-        $id=             $req->input('id');  
+    public function coment_submit(request $req)
+    {
+        /*
+                $request->validate([
+                    'id' =>  'required|numeric|max:10',
+                    'name' => 'required',
+                    'email' => 'required',
+                    'comment' => 'required',
 
-        $comments  = new CommentModel ;
-        $comments->id_confer =  $req->input('id');          
-        $comments->name =       $req->input('name');  
-        $comments->email =      $req->input('email');  
-        $comments->comment =    $req->input('comment');  
+
+                ]);
+
+        */
+        $id = $req->input('id');
+
+        $comments = new CommentModel;
+        $comments->id_confer = $req->input('id');
+        $comments->name = $req->input('name');
+        $comments->email = $req->input('email');
+        $comments->comment = $req->input('comment');
         $comments->save();
 
-        $conference_list = ConferenceModel::where('id', $id)->get(); 
-        $comments =            CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get(); 
-        return view('confer_edit', compact('conference_list','comments')); 
-      }
+        $conference_list = ConferenceModel::where('id', $id)->get();
+        $comments = CommentModel::whereRaw('id_confer = ? and allowed = 1', [$id])->get();
+        return view('confer_edit', compact('conference_list', 'comments'));
+    }
 
 
+    public function admin_download(Request $request)
+    {
+
+        $validate = $request->validate([
+            'image' => 'image | required',
+            'topic_name' => 'required',
+            'start_date' => 'required',
+            'location' => 'required',
+        ]);
 
 
-        public function admin_download (Request $request){
-
-        $validate=    $request->validate([
-                'image' => 'image | required',
-                'topic_name'=>'required',
-                'start_date'=>'required',
-                'location'=>'required',
-            ]);
+        $photo_link = $request->file('image')->store('uploads', 'public');
 
 
+        $Conference = new ConferenceModel;
+        $Conference->photo_link = $photo_link;
+        $Conference->conference_name = $request->input('topic_name');
+        $Conference->dates = $request->input('start_date');
+        $Conference->venue = $request->input('location');
+        $Conference->save();
 
 
-            $photo_link = $request->file('image')->store('uploads','public') ;
+        $conference_list = ConferenceModel::all();
+        $comments = CommentModel::all();
+        flash('Данные успешно добавлены')->success();
+        return view('admin', compact('comments', 'conference_list'));
 
+    }
 
-            $Conference  = new ConferenceModel ;
-            $Conference->photo_link =               $photo_link ;          
-            $Conference->conference_name =          $request->input('topic_name'); 
-            $Conference->dates =                    $request->input('start_date'); 
-            $Conference->venue =                    $request->input('location');
-            $Conference->save();
-
-
-
-             $conference_list =     ConferenceModel::all();
-             $comments =            CommentModel::all();
-flash('Данные успешно добавлены')->success();  
-            return view('admin', compact('comments','conference_list')); 
-     
-           }
-
-        public function admin_commentsubmit  (Request $request){
-             $conference_list =     ConferenceModel::all();
-             $comments =            CommentModel::all();
-            return view('admin', compact('comments','conference_list')); 
-           }
+    public function admin_commentsubmit(Request $request)
+    {
+        $conference_list = ConferenceModel::all();
+        $comments = CommentModel::all();
+        return view('admin', compact('comments', 'conference_list'));
+    }
 }

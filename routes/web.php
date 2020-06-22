@@ -21,25 +21,17 @@ Route::get('/', function () {
 });
 
 
+Route::get('/confer_list', 'ConferListController@confer_list')->name('confer_list');
+Route::post('/confer_edit', 'ConferListController@confer_submit')->name('confer_submit');
+Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
+Route::get('/admin', 'ConferListController@confer_admin')->name('confer_admin');
+
+Route::post('/admin', 'ConferListController@admin_download')->name('admin_download');
+Route::post('/admin/delallow', 'ConferListController@admin_commentdelallow')->name('admin_commentdelallow');
 
 
+Route::post('/admin/add', 'ConferListController@admin_delconfer')->name('admin_delconfer');
 
-
- Route::get('/confer_list', 'ConferListController@confer_list')->name('confer_list');
- Route::post('/confer_edit', 'ConferListController@confer_submit')->name('confer_submit');
- Route::post('/confer_edit/comment', 'ConferListController@coment_submit')->name('coment_submit');
- Route::get('/admin', 'ConferListController@confer_admin')->name('confer_admin');
-
- Route::post('/admin', 'ConferListController@admin_download')->name('admin_download');
- Route::post('/admin/delallow', 'ConferListController@admin_commentdelallow')->name('admin_commentdelallow');
-
-
-
- Route::post('/admin/add', 'ConferListController@admin_delconfer')->name('admin_delconfer');
-
-
-
- 
 
 Auth::routes();
 
