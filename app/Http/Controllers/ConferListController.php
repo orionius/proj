@@ -154,7 +154,7 @@ if ( $user->password ==  $hash->password ) {
 
              $conference_list =     ConferenceModel::all();
              $comments =            CommentModel::all();
-flash('Данные успешно добавлены')->error();  
+flash('Данные успешно добавлены')->success();  
             return view('admin', compact('comments','conference_list')); 
      
            }
