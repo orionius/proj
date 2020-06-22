@@ -47,9 +47,7 @@ class ConferListController extends Controller
 
     public function admin_commentdelallow (request $req )
     {
-        $request->validate([
-            'id' => 'required',
-        ]);
+
 
         $id=      $req->input('id');  
 
