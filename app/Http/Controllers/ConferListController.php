@@ -103,7 +103,7 @@ class ConferListController extends Controller
 
     public function coment_submit (request $req)
     {
-
+/*
         $request->validate([
             'id' =>  'required|numeric|max:10',
             'name' => 'required',
@@ -113,7 +113,7 @@ class ConferListController extends Controller
 
         ]);
 
-
+*/
         $id=             $req->input('id');  
 
         $comments  = new CommentModel ;
